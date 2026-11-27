@@ -1,15 +1,26 @@
-Welcome to your new dbt project!
+# dbt Fundamentals — Jaffle Shop & Stripe Analytics Project
 
-### Using the starter project
+This repository contains my hands-on analytics engineering project built while completing the **dbt Fundamentals** certification using **dbt Cloud** and **Snowflake**.
 
-Try running the following commands:
-- dbt run
-- dbt test
+## Architecture & Project Structure
 
+The project transforms raw e-commerce (`jaffle_shop`) and payment (`stripe`) tables into modular, tested dimensional models following dbt best practices:
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [dbt community](https://getdbt.com/community) to learn from other analytics engineers
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+```text
+models/
+├── staging/                 # 1:1 cleaning and renaming from raw sources
+│   ├── jaffle_shop/
+│   │   ├── _src_jaffle_shop.yml
+│   │   ├── _stg_jaffle_shop.yml
+|   |   ├── jaffle_shop_docs.md
+│   │   ├── stg_jaffle_shop__customers.sql
+│   │   └── stg_jaffle_shop__orders.sql
+│   └── stripe/
+│       ├── _src_stripe.yml
+│       ├── _stg_stripe.yml
+│       └── stg_stripe__payment.sql
+└── marts/                   # Business-ready fact and dimension models
+    ├── finance/
+    │   └── fct_orders.sql
+    └── marketing/
+        └── dim_customers.sql
